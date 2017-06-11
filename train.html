@@ -126,25 +126,20 @@
 
   });
 
-  var next = 0;
-  var away = 0;
 
   	database.ref().on("child_added", function(childsnapshot) {
 
   		var frequency = childsnapshot.val().freq; 
   		var timest = childsnapshot.val().time;
 
-  		var convertedTime = moment(timest, "hh:mm").subtract(1, "years");
+  		var convertedTime = moment(timest, "hh:mm").subtract(1, "y");
   		var diffTime = moment().diff(moment(convertedTime), "m");
   		console.log(diffTime);
   		var remainder = diffTime % frequency;
   		// console.log(remainder); 
   		var minutes = frequency - remainder; 
-  		var arrival = moment().add(minutes, "m").format("hh:mm A"); 
+  		var arrival = moment().add(minutes, "m").format("hh:mm"); 
 
-
-  		// next = 
-  		// away = 
 
   		$("#tableContent").append("<tr><td>" + childsnapshot.val().name + "</td><td>" + childsnapshot.val().dest + "</td><td>" + childsnapshot.val().freq + "</td><td>" + arrival + "</td><td>" + minutes + "</td></tr>")
   	});
