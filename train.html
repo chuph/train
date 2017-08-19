@@ -129,15 +129,24 @@
 
   	database.ref().on("child_added", function(childsnapshot) {
 
+  		// Setting frequency to variable
   		var frequency = childsnapshot.val().freq; 
+  		// Setting time start to a variable
   		var timest = childsnapshot.val().time;
+  		console.log(timest);
 
-  		var convertedTime = moment(timest, "hh:mm").subtract(1, "y");
+  		// Converting time start of trains to hh:mm
+  		var convertedTime = moment(timest, "hh:mm").subtract(1, "d");
+  		console.log(convertedTime);
+  		// Difference between time now and start time of trains
   		var diffTime = moment().diff(moment(convertedTime), "m");
   		console.log(diffTime);
+  		// Remainder when difference of time is divided by frequency 
   		var remainder = diffTime % frequency;
   		// console.log(remainder); 
+  		// finds the difference between the frequency and remainder (time left before train arrives)
   		var minutes = frequency - remainder; 
+  		// the time when the train will arrive
   		var arrival = moment().add(minutes, "m").format("hh:mm"); 
 
 
